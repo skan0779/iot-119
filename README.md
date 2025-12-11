@@ -14,6 +14,7 @@
 > KT에서 IoT 회선을 컨설팅할때 요금재를 추천해주는 PoC 서비스
 
 
+---
 
 
 ## 1. 프로젝트 개요
@@ -25,6 +26,7 @@
 - **UI 표출:** 추천한 요금제 이력 저장 및 표출하기
 
 
+---
 
 
 ## 2. 기술 스택
@@ -37,31 +39,50 @@
 | Web   | Vue.js |
 
 
+---
 
 
 ## 3. 실행 방법
 > 3개의 서버를 각각 실행하여 확인 가능합니다. 
 
 ### 3.1 Backend 실행
+> 기본 포트: http://localhost:8080
 
 ```sh
-uv run uvicorn src.main:app --host 0.0.0.0 --port 8001
+# 1. (옵션) 빌드
+./gradlew clean build
+
+# 2. Spring Boot 실행
+./gradlew bootRun
 ```
 
 ### 3.2 Frontend 실행
+> 기본 포트: http://localhost:5173
 
 ```sh
-uv run uvicorn src.main:app --host 0.0.0.0 --port 8001
+# 1. 의존성 설치
+npm install
+
+# 2. 서버 실행
+npm run dev
 ```
 
 ### 3.3 Database 실행
+> `src/main/resources/application.properties`에 아래 설정이 들어있다고 가정합니다.
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/iot119
+spring.datasource.username=postgres
+spring.datasource.password=0779
+```
 
 ```sh
-uv run uvicorn src.main:app --host 0.0.0.0 --port 8001
+# 1. DB 생성
+CREATE DATABASE iot119;
 ```
 
 
-
+---
 
 
 ## 4. 주요 모듈 구성 및 기능
@@ -72,8 +93,6 @@ iot-119/
 ├── IoT119_DB.sql                   # DB SQL문
 ├── IoT119_PPT.pptx                 # 발표자료
 ├── Backend/                        # 백엔드 소스코드
-├── Dataset/                        # 데이터셋 소스코드
-└── Frontend/                       # 프론트엔드 소스코드
-    ├── aicc_dataset.csv
-    └── company_article.csv
+├── Frontend/                       # 프론트엔드 소스코드
+└── Dataset/                        # 데이터셋
 ```
